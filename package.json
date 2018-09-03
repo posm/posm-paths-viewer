@@ -1,0 +1,32 @@
+{
+  "name": "posm-paths-viewer",
+  "version": "0.0.1",
+  "description": "app to view and manage posm-paths sequences",
+  "main": "index.js",
+  "author": "POSM developers",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack",
+    "start:dev": "webpack-dev-server --mode development",
+    "test": "mocha --require babel-core/register test/**/*.js"
+  },
+  "dependencies": {
+    "d3": "^5.7.0",
+    "d3-dispatch": "^1.0.5",
+    "d3-request": "^1.0.6",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-es2015": "^7.0.0-beta.53",
+    "babel-loader": "^8.0.2",
+    "chai": "^4.1.2",
+    "html-webpack-plugin": "^3.2.0",
+    "mocha": "^5.2.0",
+    "webpack": "^4.17.1",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.7"
+  }
+}
