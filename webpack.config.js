@@ -1,11 +1,26 @@
 const path = require('path');
+const dist = path.resolve(__dirname, 'dist');
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+// plugins
+const miniCssPlugin = new MiniCssExtractPlugin({
+	filename: '[name].css',
+	chunkFilename: '[id].css'
+});
+const htmlPlugin = new HtmlWebpackPlugin({ template: './src/index.html' });
+// loaders
+const miniCssLoader = {
+	loader: MiniCssExtractPlugin.loader,
+	options: { publicPath: dist }
+}
 
 module.exports = {
 	entry: './src/index.js',
 	output: {
 		filename: 'bundle.js',
-		path: path.resolve(__dirname, 'dist')
+		path: dist
 	},
 	module: {
 		rules: [
@@ -13,14 +28,17 @@ module.exports = {
 				test: /\.js$/,
 				include: /(src)/,
 				loader: 'babel-loader'
+			},
+			{
+				test: /\.css$/,
+				use: [ miniCssLoader, 'css-loader' ]
+
 			}
 		]
 	},
 	stats: {
 		colors: true,
 	},
-	plugins: [
-		new HtmlWebpackPlugin({ template: './src/index.html' })
-	],
+	plugins: [ htmlPlugin, miniCssPlugin ],
 	devtool: 'source-map'
 }

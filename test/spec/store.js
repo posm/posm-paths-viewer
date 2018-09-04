@@ -19,12 +19,12 @@ describe('Store', () => {
             expect(store.state.sequences).instanceOf(Array);
         })
     })
-    describe('#clear', () => {
-        it('clears out current state', () => {
-            let store = Store.getInstance();
-            expect(store.state.hasOwnProperty('sequences')).to.be.true;
-            store.clear();
-            expect(store.state.hasOwnProperty('sequences')).to.be.false;
-        })
-    })
+    // describe('#clear', () => {
+    //     it('clears out current state', () => {
+    //         let store = Store.getInstance();
+    //         expect(store.state.hasOwnProperty('sequences')).to.be.true;
+    //         store.clear();
+    //         expect(store.state.hasOwnProperty('sequences')).to.be.false;
+    //     })
+    // })
 })

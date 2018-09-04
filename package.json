@@ -6,14 +6,16 @@
   "author": "POSM developers",
   "license": "MIT",
   "scripts": {
-    "build": "webpack",
+    "build:dev": "webpack --mode development",
     "start:dev": "webpack-dev-server --mode development",
-    "test": "mocha --require babel-core/register test/**/*.js"
+    "test": "mocha --require @babel/register test/**/*.js"
   },
   "dependencies": {
     "d3": "^5.7.0",
     "d3-dispatch": "^1.0.5",
+    "d3-ease": "^1.0.5",
     "d3-request": "^1.0.6",
+    "d3-transition": "^1.1.3",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
@@ -21,10 +23,15 @@
     "@babel/core": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-es2015": "^7.0.0-beta.53",
+    "@babel/register": "^7.0.0",
     "babel-loader": "^8.0.2",
     "chai": "^4.1.2",
+    "css-loader": "^1.0.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.4.2",
     "mocha": "^5.2.0",
+    "style-loader": "^0.23.0",
     "webpack": "^4.17.1",
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.7"

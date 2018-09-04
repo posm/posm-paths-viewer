@@ -18,6 +18,13 @@ class Store {
         return this._state;
     }
 
+    get(property) {
+        if (!this._state.hasOwnProperty('property')) {
+            throw new Error('state does not have provided property');
+        }
+        return this._state[property];
+    }
+
     init() {
         if (!this._state) {
            this._state = {}
@@ -30,7 +37,7 @@ class Store {
     }
 
     update(updater) {
-        updater(this._state);
+        updater()(this._state);
     }
 }
 
