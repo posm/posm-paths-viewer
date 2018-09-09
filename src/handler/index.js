@@ -6,16 +6,9 @@ let store = Store.getInstance();
 const singleton = Symbol();
 const singletonEnforcer = Symbol();
 
-
-const _updateLogin = (context) => {
-    context.dispatch('login');
-    let loginUpdater = (login) => {
-        return (state) => {
-            state = Object.assign({}, state);
-            state.loggedIn = login;
-        }
-    }
-    context.on('login', (login) => store.update(loginUpdater(login)));
+const _updateLogin = (login) => {
+    store.update('loggedIn', login);
+    Handler.getInstance().call(login ? 'loggedIn' : 'loginFailed');
 }
 
 class Handler {
@@ -33,23 +26,35 @@ class Handler {
 
     init() {
         if (!this._dispatcher) {
-            this._dispatcher = d3_dispatch
+            this._dispatcher = null
         }
-        _updateLogin(this)
+
+        if (!this._events) {
+            this._handlersMap = {
+                'login': _updateLogin,
+                'loggedIn': () => {},
+                'loginFailed': () => {}
+            }
+
+            this._events = Object.keys(this._handlersMap);
+            this._dispatcher = d3_dispatch.apply(d3_dispatch, this._events);
+
+            for (let i = 0; i < this._events.length; i++) {
+                const eventType = this._events[i];
+                this.on(eventType, this._handlersMap[eventType]);
+            }
+
+        }
     }
 
-    call(args) {
-        this._dispatcher.call(...args);
+    call(_) {
+        this._dispatcher.call.apply(this._dispatcher, arguments);
     }
 
-    dispatch(args) {
-        this._dispatcher.dispatch(...args);
-    }
-
-    on(args) {
-        this._dispatcher.on(...args);
+    on(_) {
+        this._dispatcher.on.apply(this._dispatcher, arguments)
     }
 }
 
-export default Handler
+export default Handler;
 

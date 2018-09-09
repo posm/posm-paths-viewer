@@ -1,6 +1,6 @@
 import { select as d3_select } from 'd3';
 import { navUi } from './nav';
-
+import { mapUi } from './map';
 
 export function mainUi(context) {
     let main = {};
@@ -9,15 +9,18 @@ export function mainUi(context) {
         // build nav
         body
             .append('div')
-            .attr('class', 'nav')
+            .attr('id', 'nav')
+            .attr('class', 'row')
         
         navUi(context).render();
 
         // build map
-        // body
-        //     .append('div')
-        //     .attr('id', 'map')
-        //     .call(mapUi(context).render())
+        body
+            .append('div')
+            .attr('id', 'map')
+            .attr('class', 'row')
+
+        mapUi(context).render();
 
     }
     return main;

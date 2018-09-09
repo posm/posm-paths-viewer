@@ -5,7 +5,7 @@ import Store from '../../src/store';
 describe('Handler', () => {
     it('is a singleton', () => {
         const store = Store.getInstance(); store.init();
-        const handerA = Handler.getInstance(); 
+        const handlerA = Handler.getInstance(); 
         const handlerB = Handler.getInstance();
 
         const adder = (num) => {

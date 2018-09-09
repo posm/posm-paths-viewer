@@ -14,26 +14,19 @@ export function navUi(context) {
         }
     }
     nav.render = () => {
-        let nav = d3_select('.nav');
+        let nav = d3_select('#nav');
         
         // controls
         let navControl = nav.append('ul').attr('class', 'control');
 
         navControl
-            .append('li')
-            .attr('id', 'login')
-            .on('click' , login)
-            .append('div')
-            .attr('id', 'login-text')
-            .text(context.loggedIn ? 'logout' : 'login')
+            .append('li').attr('id', 'login').on('click' , login)
+            .append('div').attr('id', 'login-text').attr('class', 'button').text(context.loggedIn ? 'logout' : 'login')
 
 
         navControl
-            .append('li')
-            .attr('id', 'upload')
-            .append('div')
-            .attr('id', 'upload-text')
-            .text('upload')
+            .append('li').attr('id', 'upload')
+            .append('div').attr('id', 'upload-text').attr('class', 'button').text('upload')
 
         if (!context.loggedIn) {
             d3_select('#upload').attr('class', 'disabled')
